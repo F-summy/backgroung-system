@@ -11,6 +11,7 @@ import "@/styles/index.scss"; // global css
 import App from "./App";
 import store from "./store";
 import router from "./router";
+import "../mock/data";
 
 import "@/icons"; // icon
 import "@/permission"; // permission control
