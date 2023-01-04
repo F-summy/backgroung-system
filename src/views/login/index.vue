@@ -151,7 +151,31 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          console.log("验证通过");
+          this.loading = true;
+          if (this.loginForm.checked) {
+            this.loginForm.remember = 7;
+          }
+          this.$store
+            .dispatch("user/login", this.loginForm)
+            .then(() => {
+              this.$router.push({ path: this.redirect || "/" });
+              this.loading = false;
+            })
+            .catch((e) => {
+              if (typeof e == "object") {
+                this.$message({
+                  message: "账号密码错误！",
+                  type: "error",
+                });
+              } else {
+                this.$message({
+                  message: "验证码错误！",
+                  type: "warning",
+                });
+              }
+              this.loading = false;
+              this.getCodeNum();
+            });
         } else {
           console.log("验证未通过");
         }
