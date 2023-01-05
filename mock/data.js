@@ -1,5 +1,5 @@
 // import "./banner.js";
-import "./blog.js";
+// import "./blog.js";
 // import "./blogType";
 // import "./setting.js";
 // import "./about";

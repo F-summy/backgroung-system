@@ -56,7 +56,9 @@
         width="120"
       >
         <template slot-scope="scope">
-          <span>{{ scope.row.category.name }}</span>
+          <span>{{
+            scope.row.category.name ? scope.row.category.name : "未分类"
+          }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -84,7 +86,7 @@
               icon="el-icon-edit"
               circle
               size="mini"
-              @click="handleClick(scope.row)"
+              @click="handlEditeClick(scope.row)"
             ></el-button>
           </el-tooltip>
           <el-tooltip
@@ -140,11 +142,14 @@ export default {
   created() {
     this.fetchData();
   },
+
   methods: {
     format,
+    //编辑文章
+    handlEditeClick(data) {
+      this.$router.push(`/editBlog/${data.id}`);
+    },
     async fetchData() {
-      console.log("aaa", this.currentPage);
-
       const { data } = await getBlog(this.currentPage, this.eachPage);
       const arr = data.rows;
       for (var i = 0; i < arr.length; i++) {

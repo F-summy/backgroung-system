@@ -15,6 +15,7 @@ import "../mock/data";
 
 import "@/icons"; // icon
 import "@/permission"; // permission control
+import "./styles/icon/iconfont.css"; //github图标
 
 /**
  * If you don't want to use mock-server

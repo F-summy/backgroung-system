@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3852293 */
+  src: url("iconfont.woff2?t=1672908024904") format("woff2"),
+    url("iconfont.woff?t=1672908024904") format("woff"),
+    url("iconfont.ttf?t=1672908024904") format("truetype");
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 12px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-github-fill:before {
+  content: "\e885";
+}
