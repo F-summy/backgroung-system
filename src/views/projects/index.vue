@@ -185,7 +185,6 @@ export default {
     fetchData() {
       getProject().then(({ data }) => {
         this.data = data;
-        console.log(data);
         for (let i of this.data) {
           i.thumb2 = BASE_URL + i.thumb;
           this.srcList.push(i.thumb2);

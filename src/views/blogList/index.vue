@@ -1,7 +1,12 @@
 <template>
   <div class="app-container">
     <!-- 表格 -->
-    <el-table :data="data" :border="true" style="width: 100%">
+    <el-table
+      :data="data"
+      :border="true"
+      style="width: 100%"
+      v-loading="listLoading"
+    >
       <el-table-column prop="date" align="center" label="序号" width="70">
         <template slot-scope="scope">
           <span>{{ scope.$index + 1 + (currentPage - 1) * eachPage }}</span>
@@ -114,6 +119,7 @@
         :page-sizes="[5, 10, 20]"
         layout="prev, pager, next, total, ->, sizes, jumper"
         :total="count"
+        :current-page.sync="pagerCurrentPage"
         @size-change="sizeChangeHandle"
         @current-change="currentChangeHandle"
         @prev-click="prevClickHandle"
@@ -137,6 +143,7 @@ export default {
       currentPage: 1, // 当前页码，默认进来是第一页
       totalPage: 0, // 总页数
       count: 0, // 数据总条数
+      pagerCurrentPage: 1,
     };
   },
   created() {
@@ -150,7 +157,9 @@ export default {
       this.$router.push(`/editBlog/${data.id}`);
     },
     async fetchData() {
+      this.listLoading = true;
       const { data } = await getBlog(this.currentPage, this.eachPage);
+      this.listLoading = false;
       const arr = data.rows;
       for (var i = 0; i < arr.length; i++) {
         arr[i].thumb = BASE_URL + arr[i].thumb;
@@ -194,7 +203,7 @@ export default {
     // 分页相关事件
     sizeChangeHandle(pagerNum) {
       this.eachPage = parseInt(pagerNum);
-      //   this.pagerCurrentPage = 1;
+      this.pagerCurrentPage = 1;
       this.currentPage = 1;
       this.fetchData();
     },

@@ -34,6 +34,7 @@ export function putBlog({ id, data }) {
     data,
   });
 }
+
 //查找某一篇文章
 export function findOneBlog(id) {
   return request({
